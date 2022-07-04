@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/presentation/fast_laughs/screen_fast_laugh.dart';
 import 'package:netflix_clone/presentation/home/screen_home.dart';
 import 'package:netflix_clone/presentation/main_page/widgets/bottomnav.dart';
@@ -11,11 +8,11 @@ import 'package:netflix_clone/presentation/search_page/screen_search.dart';
 
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({Key? key}) : super(key: key);
-  final _pages = const [
-    ScreenHome(),
-    ScreenNewAndHot(),
-    ScreenFastAndLaugh(),
-    ScreenSearch(),
+  final _pages = [
+    const ScreenHome(),
+    const ScreenNewAndHot(),
+    const ScreenFastAndLaugh(),
+    const ScreenSearch(),
     ScreenDownloads(),
   ];
 
