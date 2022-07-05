@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constnts.dart';
 import 'package:netflix_clone/presentation/search_page/widget/result_page.dart';
 import 'package:netflix_clone/presentation/search_page/widget/search_idile.dart';
+import 'package:netflix_clone/presentation/search_page/widget/title.dart';
 
 class ScreenSearch extends StatelessWidget {
   const ScreenSearch({Key? key}) : super(key: key);
@@ -33,7 +34,8 @@ class ScreenSearch extends StatelessWidget {
             //     child: ScreenIdile(
             //   title: 'Top Searches',
             // )),
-            Expanded(child: SearchResultWidget()),
+
+            Expanded(child: SearchResultWidget())
           ],
         ),
       )),
