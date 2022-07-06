@@ -7,7 +7,7 @@ import 'package:netflix_clone/presentation/widgets/main_title.dart';
 
 import '../widgets/main_card_widget.dart';
 
-ValueNotifier<bool> scrollNotifier = ValueNotifier(false);
+ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class ScreenHome extends StatelessWidget {
         return NotificationListener<UserScrollNotification>(
           onNotification: ((notification) {
             final ScrollDirection direction = notification.direction;
-            print(direction);
+            // print(direction);
             if (direction == ScrollDirection.reverse) {
               scrollNotifier.value = false;
             } else if (direction == ScrollDirection.forward) {
@@ -78,7 +78,7 @@ class ScreenHome extends StatelessWidget {
                     title: 'Trending Now',
                   ),
                   kHieght,
-                  NumberTileCard(),
+                  const NumberTileCard(),
                   kHieght,
                   const MainCardTitle(
                     title: 'Tense Dramas',
@@ -107,19 +107,17 @@ class ScreenHome extends StatelessWidget {
                                   width: 40,
                                   height: 40,
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 const Icon(
                                   Icons.cast,
                                   color: Colors.white,
                                 ),
                                 kWdith,
-                                Container(
+                                Image.network(
+                                  "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png",
                                   width: 30,
                                   height: 30,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.blue,
-                                  ),
-                                ),
+                                )
                               ],
                             ),
                             Row(
