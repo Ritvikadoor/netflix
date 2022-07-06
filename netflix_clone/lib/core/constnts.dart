@@ -8,4 +8,9 @@ const kBlackColor = Colors.black;
 final kButtonCOlorBlue = Colors.blueAccent[700];
 const kButtonColorWhite = Colors.white;
 
-BorderRadius kRadius20 = BorderRadius.circular(20);
+BorderRadius kRadius10 = BorderRadius.circular(10);
+
+/////image
+
+const kMainIMage =
+    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/nJUHX3XL1jMkk8honUZnUmudFb9.jpg";

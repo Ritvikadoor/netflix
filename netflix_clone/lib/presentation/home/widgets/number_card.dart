@@ -20,11 +20,11 @@ class NumberCard extends StatelessWidget {
               width: 140,
               height: 230,
               decoration: BoxDecoration(
-                borderRadius: kRadius20,
+                borderRadius: kRadius10,
                 image: const DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                      "https://www.themoviedb.org/t/p/w220_and_h330_face/ews3l3v7JYLtBS5ansZrXsXLMzl.jpg"),
+                      "https://www.themoviedb.org/t/p/w220_and_h330_face/qhcwrnnCnN8NE1N6XXKHFmveJR9.jpg"),
                 ),
               ),
             ),
@@ -32,7 +32,7 @@ class NumberCard extends StatelessWidget {
         ),
         Positioned(
           left: 10,
-          bottom: 10,
+          bottom: -25,
           child: BorderedText(
             strokeWidth: 10.0,
             strokeColor: kWhiteColor,
@@ -40,6 +40,7 @@ class NumberCard extends StatelessWidget {
               "${index + 1}",
               style: TextStyle(
                 fontSize: 120,
+                fontWeight: FontWeight.bold,
                 color: kBlackColor,
                 decoration: TextDecoration.none,
                 decorationColor: kWhiteColor,
