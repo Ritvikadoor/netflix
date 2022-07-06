@@ -15,75 +15,148 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: NotificationListener<UserScrollNotification>(
-      onNotification: ((notification) {
-        final ScrollDirection direction = notification.direction;
-        print(direction);
-        if (direction == ScrollDirection.reverse) {
-          scrollNotifier.value = false;
-        } else if (direction == ScrollDirection.forward) {
-          scrollNotifier.value = true;
-        }
-        return true;
-      }),
-      child: ListView(
-        children: [
-          Stack(
+        body: ValueListenableBuilder(
+      valueListenable: scrollNotifier,
+      builder: (context, value, child) {
+        return NotificationListener<UserScrollNotification>(
+          onNotification: ((notification) {
+            final ScrollDirection direction = notification.direction;
+            print(direction);
+            if (direction == ScrollDirection.reverse) {
+              scrollNotifier.value = false;
+            } else if (direction == ScrollDirection.forward) {
+              scrollNotifier.value = true;
+            }
+            return true;
+          }),
+          child: Stack(
             children: [
-              Container(
-                width: double.infinity,
-                height: 600,
-                decoration: const BoxDecoration(
-                  color: kWhiteColor,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(kMainIMage),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              ListView(
+                children: [
+                  Stack(
                     children: [
-                      const CustomAddButton(
-                        icon: Icons.add,
-                        title: "My List",
+                      Container(
+                        width: double.infinity,
+                        height: 600,
+                        decoration: const BoxDecoration(
+                          color: kWhiteColor,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(kMainIMage),
+                          ),
+                        ),
                       ),
-                      _PlayButton(),
-                      const CustomAddButton(
-                        icon: Icons.info,
-                        title: "Info",
-                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const CustomAddButton(
+                                icon: Icons.add,
+                                title: "My List",
+                              ),
+                              _PlayButton(),
+                              const CustomAddButton(
+                                icon: Icons.info,
+                                title: "Info",
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
                     ],
                   ),
-                ),
-              )
+                  const MainCardTitle(
+                    title: 'Realsed in the past year',
+                  ),
+                  kHieght,
+                  const MainCardTitle(
+                    title: 'Trending Now',
+                  ),
+                  kHieght,
+                  NumberTileCard(),
+                  kHieght,
+                  const MainCardTitle(
+                    title: 'Tense Dramas',
+                  ),
+                  kHieght,
+                  const MainCardTitle(
+                    title: 'South Indian Cinema',
+                  ),
+                ],
+              ),
+              scrollNotifier.value == true
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        width: double.infinity,
+                        height: 90,
+                        color: Colors.transparent,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Image.network(
+                                  "https://www.nicepng.com/png/full/12-127235_netflix-logo-png.png",
+                                  width: 40,
+                                  height: 40,
+                                ),
+                                Spacer(),
+                                const Icon(
+                                  Icons.cast,
+                                  color: Colors.white,
+                                ),
+                                kWdith,
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const [
+                                Text(
+                                  'TV Shows ',
+                                  style: TextStyle(
+                                      // color: kBlackColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'Movies',
+                                  style: TextStyle(
+                                      // color: kBlackColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'Categories',
+                                  style: TextStyle(
+                                      // color: kBlackColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  : kHieght,
             ],
           ),
-          MainCardTitle(
-            title: 'Realsed in the past year',
-          ),
-          kHieght,
-          MainCardTitle(
-            title: 'Trending Now',
-          ),
-          kHieght,
-          NumberTileCard(),
-          kHieght,
-          MainCardTitle(
-            title: 'Tense Dramas',
-          ),
-          kHieght,
-          MainCardTitle(
-            title: 'South Indian Cinema',
-          ),
-        ],
-      ),
+        );
+      },
     ));
   }
 
@@ -98,7 +171,7 @@ class ScreenHome extends StatelessWidget {
           color: kBlackColor,
         ),
         label: const Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             "Play",
             style: TextStyle(fontSize: 20, color: kBlackColor),
