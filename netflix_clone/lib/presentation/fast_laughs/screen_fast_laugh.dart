@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix_clone/presentation/fast_laughs/widget/video_list_item.dart';
 
 import '../../core/colors/colors.dart';
 
@@ -8,10 +9,14 @@ class ScreenFastAndLaugh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Center(
-        child: Text('Fast Laugh'),
-      ),
-    );
+        backgroundColor: backgroundColor,
+        body: SafeArea(
+            child: PageView(
+                scrollDirection: Axis.vertical,
+                children: List.generate(10, (index) {
+                  return VedioListItem(
+                    index: index,
+                  );
+                }))));
   }
 }

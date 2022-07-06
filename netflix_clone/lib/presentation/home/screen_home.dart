@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
-import '../../core/colors/colors.dart';
+import 'package:netflix_clone/core/constnts.dart';
+import 'package:netflix_clone/presentation/widgets/main_title.dart';
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({Key? key}) : super(key: key);
@@ -10,10 +8,20 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
-      body: Center(
-        child: Text('Home'),
-      ),
-    );
+        body: Column(
+      children: [
+        const MainTitle(title: "Released in the past year"),
+        Container(
+          width: 140,
+          height: 230,
+          decoration: BoxDecoration(
+              borderRadius: kRadius20,
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      "https://www.themoviedb.org/t/p/w220_and_h330_face/ews3l3v7JYLtBS5ansZrXsXLMzl.jpg"))),
+        )
+      ],
+    ));
   }
 }
