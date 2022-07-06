@@ -77,6 +77,7 @@ class ScreenNewAndHot extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return ListView(
+      shrinkWrap: true,
       children: [
         Column(
           children: [
@@ -186,6 +187,10 @@ class ScreenNewAndHot extends StatelessWidget {
                         'Train To Busan',
                         style: TextStyle(
                             fontSize: 22, fontWeight: FontWeight.bold),
+                      ),
+                      const Text(
+                        'Martial law is declared when a mysterious viral outbreak pushes Korea into a state of emergency. Those on an express train to Busan, a city that has successfully fended off the viral outbreak, must fight for their own survival…',
+                        style: TextStyle(color: greyColor),
                       )
                     ],
                   ),
