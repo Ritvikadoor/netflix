@@ -7,6 +7,9 @@ const kWhiteColor = Colors.white;
 const kBlackColor = Colors.black;
 final kButtonCOlorBlue = Colors.blueAccent[700];
 const kButtonColorWhite = Colors.white;
+const kHieght50 = SizedBox(
+  height: 50,
+);
 
 BorderRadius kRadius10 = BorderRadius.circular(10);
 BorderRadius kRadius30 = BorderRadius.circular(30);
@@ -15,3 +18,5 @@ BorderRadius kRadius30 = BorderRadius.circular(30);
 
 const kMainIMage =
     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/nJUHX3XL1jMkk8honUZnUmudFb9.jpg";
+const NewAndHotTempImage =
+    "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/3PzqqeWCuNhFW68zHFvRRKOj2qQ.jpg";
