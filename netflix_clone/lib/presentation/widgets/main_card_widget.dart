@@ -17,7 +17,7 @@ class MainCard extends StatelessWidget {
           image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
-                  "https://www.themoviedb.org/t/p/w220_and_h330_face/ews3l3v7JYLtBS5ansZrXsXLMzl.jpg"))),
+                  "https://cdn.europosters.eu/image/750/posters/the-dark-tower-city-i49958.jpg"))),
     );
   }
 }

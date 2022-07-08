@@ -17,6 +17,6 @@ BorderRadius kRadius30 = BorderRadius.circular(30);
 /////image
 
 const kMainIMage =
-    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/nJUHX3XL1jMkk8honUZnUmudFb9.jpg";
+    "https://i0.wp.com/www.socialnews.xyz/wp-content/uploads/2020/07/26/project-power-movie-HD-Posters-.jpg?quality=80&zoom=1&ssl=1";
 const NewAndHotTempImage =
     "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/3PzqqeWCuNhFW68zHFvRRKOj2qQ.jpg";
