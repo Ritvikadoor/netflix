@@ -27,7 +27,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  analyzer: ^4.2.0
+  analyzer:
+  glob: ^2.0.0
   bordered_text: ^2.0.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
@@ -38,19 +39,19 @@ dependencies:
   freezed_annotation: ^2.0.3
   get_it: ^7.2.0
   google_fonts: ^3.0.1
-  http: ^0.13.4
   injectable: ^1.5.3
   json_annotation: ^4.5.0
-  json_serializable: ^6.3.0
+  json_serializable:
   video_player: ^2.4.5
 
 dev_dependencies:
-  
+  injectable_generator: 
   build_runner: ^2.1.11
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   freezed: ^2.0.4
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
