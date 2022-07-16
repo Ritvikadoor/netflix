@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
+import 'package:netflix_clone/data/data_source/movie_remote_data_source.dart';
 import 'package:netflix_clone/presentation/main_page/screen_main_page.dart';
 
 void main() {

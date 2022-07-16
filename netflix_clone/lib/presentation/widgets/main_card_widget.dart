@@ -1,23 +1,5 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:netflix_clone/data/data_source/movie_model/movie_model.dart';
+// import 'package:netflix_clone/data/data_source/movie_remote_data_source.dart';
 
-import '../../core/constnts.dart';
-
-class MainCard extends StatelessWidget {
-  const MainCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 140,
-      height: 230,
-      decoration: BoxDecoration(
-          borderRadius: kRadius10,
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                  "https://cdn.europosters.eu/image/750/posters/the-dark-tower-city-i49958.jpg"))),
-    );
-  }
-}
+// import '../../core/constnts.dart';

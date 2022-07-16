@@ -1,23 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:netflix_clone/core/constnts.dart';
+import 'package:netflix_clone/data/data_source/movie_model/movie_model.dart';
+import 'package:netflix_clone/data/data_source/movie_remote_data_source.dart';
 import 'package:netflix_clone/presentation/home/widgets/custom_button.dart';
 import 'package:netflix_clone/presentation/home/widgets/numbertitlecard.dart';
+import 'package:netflix_clone/presentation/main_page/widgets/bottomnav.dart';
 import 'package:netflix_clone/presentation/widgets/main_title.dart';
-
-import '../widgets/main_card_widget.dart';
 
 ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
-class ScreenHome extends StatelessWidget {
-  const ScreenHome({Key? key}) : super(key: key);
+class ScreenHome extends StatefulWidget {
+  List<MovieModel> listmovie = [];
+
+  ScreenHome({Key? key}) : super(key: key);
+
+  @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
+  @override
+  void initState() {
+    listget();
+
+    super.initState();
+  }
+
+  void listget() async {
+    final movies = await getTrending("popular");
+    setState(() {
+      widget.listmovie = movies;
+      print(widget.listmovie);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: ValueListenableBuilder(
       valueListenable: scrollNotifier,
-      builder: (context, value, child) {
+      builder: (context, value, _) {
         return NotificationListener<UserScrollNotification>(
           onNotification: ((notification) {
             final ScrollDirection direction = notification.direction;
@@ -38,11 +61,12 @@ class ScreenHome extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         height: 600,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: kWhiteColor,
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(kMainIMage),
+                            image: NetworkImage(
+                                "https://image.tmdb.org/t/p/w500${widget.listmovie[0].posterPath}"),
                           ),
                         ),
                       ),
@@ -70,23 +94,21 @@ class ScreenHome extends StatelessWidget {
                       )
                     ],
                   ),
-                  const MainCardTitle(
+                  FirstCard(
                     title: 'Realsed in the past year',
                   ),
                   kHieght,
-                  const MainCardTitle(
-                    title: 'Trending Now',
-                  ),
+                  SecondCard(title: 'Trending Now'),
                   kHieght,
                   const NumberTileCard(),
                   kHieght,
-                  const MainCardTitle(
-                    title: 'Tense Dramas',
-                  ),
+                  // MainCardTitle(
+                  //   title: 'Tense Dramas',
+                  // ),
                   kHieght,
-                  const MainCardTitle(
-                    title: 'South Indian Cinema',
-                  ),
+                  // MainCardTitle(
+                  //   title: 'South Indian Cinema',
+                  // ),
                 ],
               ),
               scrollNotifier.value == true
@@ -178,29 +200,180 @@ class ScreenHome extends StatelessWidget {
   }
 }
 
-class MainCardTitle extends StatelessWidget {
-  const MainCardTitle({Key? key, required this.title}) : super(key: key);
+class FirstCard extends StatefulWidget {
+  FirstCard({Key? key, required this.title}) : super(key: key);
   final String title;
+
+  @override
+  State<FirstCard> createState() => _FirstCardState();
+}
+
+class _FirstCardState extends State<FirstCard> {
+  List<MovieModel> listmovie = [];
+
+  @override
+  void initState() {
+    listget();
+    super.initState();
+  }
+
+  void listget() async {
+    final movies = await getTrending("popular");
+    setState(() {
+      listmovie = movies;
+      print(listmovie);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        MainTitle(title: title),
+        MainTitle(title: widget.title),
         LimitedBox(
           maxHeight: 200,
-          child: ListView(
+          child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            children: List.generate(
-                10,
-                (index) => const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: MainCard(),
-                    )),
+            itemBuilder: (ctx, index) {
+              return Container(
+                width: 140,
+                height: 230,
+                decoration: BoxDecoration(
+                    borderRadius: kRadius10,
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            "https://image.tmdb.org/t/p/w500${listmovie[index].posterPath}"))),
+              );
+            },
+            itemCount: listmovie.length,
           ),
         )
       ],
     );
   }
 }
+
+class SecondCard extends StatefulWidget {
+  SecondCard({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<SecondCard> createState() => _SecondCardState();
+}
+
+class _SecondCardState extends State<SecondCard> {
+  List<MovieModel> listmovie = [];
+
+  @override
+  void initState() {
+    listget();
+    super.initState();
+  }
+
+  void listget() async {
+    final movies = await getTrending("upcoming");
+    setState(() {
+      listmovie = movies;
+      print(listmovie);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MainTitle(title: widget.title),
+        LimitedBox(
+          maxHeight: 200,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (ctx, index) {
+              return Container(
+                width: 140,
+                height: 230,
+                decoration: BoxDecoration(
+                    borderRadius: kRadius10,
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            "https://image.tmdb.org/t/p/w500${listmovie[index].posterPath}"))),
+              );
+            },
+            itemCount: listmovie.length,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+// class CardReleased extends StatefulWidget {
+//   final int index;
+
+//   const CardReleased({Key? key, required this.index}) : super(key: key);
+
+//   @override
+//   State<CardReleased> createState() => _CardReleasedState();
+// }
+
+// class _CardReleasedState extends State<CardReleased> {
+//   List<MovieModel> listmovie = [];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 140,
+//       height: 230,
+//       decoration: BoxDecoration(
+//           borderRadius: kRadius10,
+//           image: DecorationImage(
+//               fit: BoxFit.cover,
+//               image: NetworkImage(
+//                   "https://image.tmdb.org/t/p/w500${listmovie[widget.index].posterPath}"))),
+//     );
+//   }
+// }
+
+// class MainCard extends StatefulWidget {
+//   final int index;
+//   List<MovieModel> listmovie = [];
+
+//   MainCard({Key? key, required this.index}) : super(key: key);
+
+//   @override
+//   State<MainCard> createState() => _MainCardState();
+// }
+
+// class _MainCardState extends State<MainCard> {
+//   @override
+//   void initState() {
+//     listget();
+
+//     super.initState();
+//   }
+
+//   void listget() async {
+//     final movies = await getTrending("popular");
+//     setState(() {
+//       widget.listmovie = movies;
+//       print(widget.listmovie);
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 140,
+//       height: 230,
+//       decoration: BoxDecoration(
+//           borderRadius: kRadius10,
+//           image: DecorationImage(
+//               fit: BoxFit.cover,
+//               image: NetworkImage(
+//                   "https://image.tmdb.org/t/p/w500${widget.listmovie[widget.index].posterPath}"))),
+//     );
+//   }
+// }

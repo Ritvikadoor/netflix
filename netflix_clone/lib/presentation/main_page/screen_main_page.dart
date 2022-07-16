@@ -9,7 +9,7 @@ import 'package:netflix_clone/presentation/search_page/screen_search.dart';
 class ScreenMainPage extends StatelessWidget {
   ScreenMainPage({Key? key}) : super(key: key);
   final _pages = [
-    const ScreenHome(),
+    ScreenHome(),
     const ScreenNewAndHot(),
     const ScreenFastAndLaugh(),
     const ScreenSearch(),
