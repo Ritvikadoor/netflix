@@ -310,6 +310,7 @@ class _SecondCardState extends State<SecondCard> {
   }
 }
 
+
 // class CardReleased extends StatefulWidget {
 //   final int index;
 
