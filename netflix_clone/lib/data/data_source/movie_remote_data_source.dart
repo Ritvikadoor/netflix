@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:netflix_clone/data/data_source/movie_model/movie_model.dart';
@@ -14,9 +15,9 @@ Future<List<MovieModel>> getTrending(String kCatagory) async {
 
     Iterable list = responseBody['results'];
 
-    return list.map((model) => MovieModel.fromJson(model)).toList();
+    return list.map((index) => MovieModel.fromJson(index)).toList();
   } else {
-    print('hello');
-    throw Exception(response.reasonPhrase);
+    // print('hello');
+    throw CircularProgressIndicator();
   }
 }

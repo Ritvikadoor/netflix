@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constnts.dart';
 
 class VideoWidget extends StatelessWidget {
-  const VideoWidget({
-    Key? key,
-  }) : super(key: key);
+  String backPoster;
+  VideoWidget({Key? key, required this.backPoster}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +13,8 @@ class VideoWidget extends StatelessWidget {
           height: 200,
           width: double.infinity,
           child: Image.network(
-            "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/fVpFOcQyHJM2di9upgSIwWD5wac.jpg",
-            fit: BoxFit.cover,
+            backPoster,
+            fit: BoxFit.contain,
           ),
         ),
         Positioned(

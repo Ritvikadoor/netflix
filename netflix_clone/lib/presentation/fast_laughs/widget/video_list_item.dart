@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constnts.dart';
 
-class VedioListItem extends StatelessWidget {
+class VedioListItem extends StatefulWidget {
   final int index;
   const VedioListItem({Key? key, required this.index}) : super(key: key);
 
+  @override
+  State<VedioListItem> createState() => _VedioListItemState();
+}
+
+class _VedioListItemState extends State<VedioListItem> {
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          color: Colors.accents[index % Colors.accents.length],
+          color: Colors.yellow,
         ),
         Align(
           alignment: Alignment.bottomCenter,

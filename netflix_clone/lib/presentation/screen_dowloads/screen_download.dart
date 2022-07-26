@@ -2,110 +2,129 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constnts.dart';
+import 'package:netflix_clone/data/data_source/movie_model/movie_model.dart';
+import 'package:netflix_clone/data/data_source/movie_remote_data_source.dart';
 import 'package:netflix_clone/presentation/widgets/app_bar.dart';
 
-class ScreenDownloads extends StatelessWidget {
+class ScreenDownloads extends StatefulWidget {
   ScreenDownloads({Key? key}) : super(key: key);
-  final widgetList = [_SmartDownloads(), Section2(), Section3()];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(40),
-        child: AppBarWidget(
-          title: 'Downloads',
-        ),
-      ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(10),
-        itemBuilder: (context, index) => widgetList[index],
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 10,
-        ),
-        itemCount: widgetList.length,
-      ),
-    );
-  }
+  State<ScreenDownloads> createState() => _ScreenDownloadsState();
 }
 
-class Section2 extends StatelessWidget {
-  Section2({Key? key}) : super(key: key);
-  final List imageList = [
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/qsdjk9oAKSQMWs0Vt5Pyfh6O4GZ.jpg",
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/xf9wuDcqlUPWABZNeDKPbZUjWx0.jpg",
-    "https://www.themoviedb.org/t/p/w220_and_h330_face/rJHC1RUORuUhtfNb4Npclx0xnOf.jpg",
-  ];
+class _ScreenDownloadsState extends State<ScreenDownloads> {
+  List<MovieModel> listmovie = [];
+  @override
+  void initState() {
+    listget();
+
+    super.initState();
+  }
+
+  void listget() async {
+    final movies = await getTrending("popular");
+    setState(() {
+      listmovie = movies;
+      // print(widget.listmovie);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        kHieght,
-        kHieght,
-        const Text(
-          'Introducing Downloads for you',
-          style: TextStyle(
-            color: kWhiteColor,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        kHieght,
-        const Text(
-          'We will download a personalised selection of\n movies and shows for you, so there is\nalways something to watch on your\ndevice ',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 14,
-              letterSpacing: 0.3,
-              wordSpacing: 0.6,
-              color: Colors.grey,
-              fontWeight: FontWeight.w500),
-        ),
-        Container(
-          width: size.width,
-          height: size.width,
-          color: Colors.black,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Center(
-                child: CircleAvatar(
-                  radius: size.width * 0.3,
-                  backgroundColor: Colors.grey.withOpacity(0.5),
-                ),
-              ),
-              DownloadImageWidget(
-                  sized: Size(size.width * 0.25, size.width * 0.4),
-                  rotatioAngle: 15,
-                  imageList: imageList[0],
-                  margin: const EdgeInsets.only(
-                    top: 40,
-                    left: 190,
-                  )),
-              DownloadImageWidget(
-                sized: Size(size.width * 0.25, size.width * 0.4),
-                imageList: imageList[1],
-                rotatioAngle: -15,
-                margin: const EdgeInsets.only(
-                  top: 40,
-                  right: 190,
-                ),
-              ),
-              DownloadImageWidget(
-                sized: Size(size.width * 0.35, size.width * 0.48),
-                imageList: imageList[2],
-                margin: const EdgeInsets.only(
-                  top: 10,
-                ),
-              ),
-            ],
+
+    return Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(40),
+          child: AppBarWidget(
+            title: 'Downloads',
           ),
         ),
-      ],
-    );
+        body: listmovie.isEmpty
+            ? Container(child: Center(child: CircularProgressIndicator()))
+            : ListView(
+                children: [
+                  _SmartDownloads(),
+                  Column(
+                    children: [
+                      kHieght,
+                      kHieght,
+                      const Text(
+                        'Introducing Downloads for you',
+                        style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      kHieght,
+                      const Text(
+                        'We will download a personalised selection of\n movies and shows for you, so there is\nalways something to watch on your\ndevice ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 14,
+                            letterSpacing: 0.3,
+                            wordSpacing: 0.6,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      listmovie.isEmpty
+                          ? Container(
+                              child: Center(child: CircularProgressIndicator()))
+                          : Container(
+                              width: size.width,
+                              height: size.width,
+                              color: Colors.black,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Center(
+                                    child: CircleAvatar(
+                                      radius: size.width * 0.3,
+                                      backgroundColor:
+                                          Colors.grey.withOpacity(0.5),
+                                    ),
+                                  ),
+                                  DownloadImageWidget(
+                                      sized: Size(
+                                          size.width * 0.25, size.width * 0.4),
+                                      rotatioAngle: 15,
+                                      imageList:
+                                          "https://image.tmdb.org/t/p/w500${listmovie[0].posterPath}",
+                                      margin: const EdgeInsets.only(
+                                        top: 40,
+                                        left: 190,
+                                      )),
+                                  DownloadImageWidget(
+                                    sized: Size(
+                                        size.width * 0.25, size.width * 0.4),
+                                    imageList:
+                                        "https://image.tmdb.org/t/p/w500${listmovie[1].posterPath}",
+                                    rotatioAngle: -15,
+                                    margin: const EdgeInsets.only(
+                                      top: 40,
+                                      right: 190,
+                                    ),
+                                  ),
+                                  DownloadImageWidget(
+                                    sized: Size(
+                                        size.width * 0.35, size.width * 0.48),
+                                    imageList:
+                                        "https://image.tmdb.org/t/p/w500${listmovie[2].posterPath}",
+                                    margin: const EdgeInsets.only(
+                                      top: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                    ],
+                  ),
+                  Section3()
+                ],
+              ));
   }
 }
 

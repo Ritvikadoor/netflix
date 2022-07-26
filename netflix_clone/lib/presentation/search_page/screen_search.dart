@@ -30,10 +30,7 @@ class ScreenSearch extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
             ),
             kHieght,
-            // Expanded(
-            //     child: ScreenIdile(
-            //   title: 'Top Searches',
-            // )),
+            //Expanded(child: ScreenIdile()),
 
             Expanded(child: SearchResultWidget())
           ],

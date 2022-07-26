@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
-import 'package:netflix_clone/data/data_source/movie_remote_data_source.dart';
-import 'package:netflix_clone/presentation/main_page/screen_main_page.dart';
+import 'package:netflix_clone/presentation/splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,16 +24,7 @@ class MyApp extends StatelessWidget {
               bodyText2: const TextStyle(color: Colors.white)),
           primarySwatch: Colors.blue,
           backgroundColor: Colors.black),
-      home: ScreenMainPage(),
+      home: SplashScreen(),
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
   }
 }

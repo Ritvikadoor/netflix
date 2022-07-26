@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:netflix_clone/presentation/widgets/video_widget.dart';
 
 import '../../../core/colors/colors.dart';
@@ -6,9 +7,15 @@ import '../../../core/constnts.dart';
 import '../../home/widgets/custom_button.dart';
 
 class ComingSoonWidget extends StatelessWidget {
-  const ComingSoonWidget({
-    Key? key,
-  }) : super(key: key);
+  String imageBackPoster;
+  String title;
+  String subtitle;
+  ComingSoonWidget(
+      {Key? key,
+      required this.title,
+      required this.imageBackPoster,
+      required this.subtitle})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,42 +49,46 @@ class ComingSoonWidget extends StatelessWidget {
           width: size.width - 60,
           height: 450,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const VideoWidget(),
+              VideoWidget(backPoster: imageBackPoster),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Train To Busan',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -5,
+                  Flexible(
+                    child: Text(
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: -3,
+                      ),
                     ),
                   ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        CustomAddButton(
-                          icon: Icons.add_alert_rounded,
-                          title: "Remind me",
-                          iconSize: 15,
-                          textSize: 10,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        CustomAddButton(
-                          icon: Icons.info,
-                          title: "Info",
-                          iconSize: 15,
-                          textSize: 10,
-                        ),
-                      ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        children: const [
+                          CustomAddButton(
+                            icon: Icons.add_alert_rounded,
+                            title: "Remind me",
+                            iconSize: 15,
+                            textSize: 10,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          CustomAddButton(
+                            icon: Icons.info,
+                            title: "Info",
+                            iconSize: 15,
+                            textSize: 10,
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],
@@ -87,12 +98,15 @@ class ComingSoonWidget extends StatelessWidget {
                 style: TextStyle(color: greyColor, fontWeight: FontWeight.bold),
               ),
               kHieght,
-              const Text(
-                'Train To Busan',
+              Text(
+                title,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
-              const Text(
-                'Martial law is declared when a mysterious viral outbreak pushes Korea into a state of emergency. Those on an express train to Busan, a city that has successfully fended off the viral outbreak, must fight for their own survival…',
+              Text(
+                subtitle,
+                maxLines: 5,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: greyColor),
               ),
             ],
